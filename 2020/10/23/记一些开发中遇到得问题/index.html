@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/logo.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/logo.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/logo.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/assets/images/logo.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="平时开发中遇到的一些问题及解决方法">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一些开发中遇到得问题...">
+<meta property="og:url" content="https://shadownc.github.io/2020/10/23/记一些开发中遇到得问题/index.html">
+<meta property="og:site_name" content="Shadownc">
+<meta property="og:description" content="平时开发中遇到的一些问题及解决方法">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2023-08-06T05:42:18.206Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="记一些开发中遇到得问题...">
+<meta name="twitter:description" content="平时开发中遇到的一些问题及解决方法">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shadownc.github.io/2020/10/23/记一些开发中遇到得问题/">
+
+
+
+
+
+  <title>记一些开发中遇到得问题... | Shadownc</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e912005b8908a4cb8be7580e51860d67";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  <script src="/live2d-widget/autoload.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shadownc</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br>
+            
+            友链
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shadownc.github.io/2020/10/23/记一些开发中遇到得问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="shadow">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/assets/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shadownc">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">记一些开发中遇到得问题...</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-23T17:36:11+00:00">
+                2020-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>平时开发中遇到的一些问题及解决方法<br><a id="more"></a></p>
+<h5 id="onclick事件传递对象参数"><a href="#onclick事件传递对象参数" class="headerlink" title="onclick事件传递对象参数"></a>onclick事件传递对象参数</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">onclick=<span class="string">"todo("</span>+<span class="built_in">JSON</span>.stringify(data).replace(<span class="regexp">/"/g</span>, <span class="string">'&amp;quot;'</span>)+<span class="string">")"</span></span><br><span class="line">demo:</span><br><span class="line">&lt;a <span class="class"><span class="keyword">class</span></span>=<span class="string">"fc-check"</span> onclick=<span class="string">"goDetail('+JSON.stringify(fcOrderList[i].orderId).replace(/"</span>/g, <span class="string">'&amp;quot;'</span>)+<span class="string">')"&gt;查看&lt;/a&gt;//传递单个参数 单引号拼接</span></span><br><span class="line"><span class="string">"&lt;td width=\"120\"&gt;&lt;a class=\"fc-check\" onclick=\"todo("+JSON.stringify(data).replace(/"/g, '</span>&amp;quot;<span class="string">')+")\"&gt;查看&lt;/a&gt;&lt;/td&gt;"//双引号拼接 传递对象参数--需要用\(反斜杠)转义</span></span><br></pre></td></tr></table></figure>
+<h5 id="ajax-post方法参数问题"><a href="#ajax-post方法参数问题" class="headerlink" title="ajax post方法参数问题"></a>ajax post方法参数问题</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj=&#123;&#125;;</span><br><span class="line">obj.gameName=<span class="string">'xxx'</span>;</span><br><span class="line">obj.gameId=<span class="string">'xxx'</span>;</span><br><span class="line">$.ajax(&#123;</span><br><span class="line">            type: <span class="string">"POST"</span>,</span><br><span class="line">            url: url+ <span class="string">"?t="</span> + <span class="keyword">new</span> <span class="built_in">Date</span>().getTime(),</span><br><span class="line">            data: <span class="built_in">JSON</span>.stringify(obj),</span><br><span class="line">            contentType: <span class="string">"application/json; charset=UTF-8"</span>,</span><br><span class="line">            dataType: <span class="string">"json"</span>,</span><br><span class="line">            success: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">               <span class="built_in">console</span>.log(res)</span><br><span class="line">        &#125;);</span><br><span class="line"><span class="comment">//使用contentType: “application/json”则data只能是json字符串</span></span><br></pre></td></tr></table></figure>
+<h5 id="switch-data"><a href="#switch-data" class="headerlink" title="switch(data){}"></a>switch(data){}</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(data)&#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">'1'</span>:</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="number">11</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">22</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//switch对参数类型敏感 可以先打印看看data到底是什么类型的参数 console.log(typeof data);</span></span><br><span class="line"><span class="comment">//如果参数data=1是字符串可以打印出11，但是如果1是number那么就不会去执行case1下面得了</span></span><br></pre></td></tr></table></figure>
+<h5 id="WdatePicker-js使用"><a href="#WdatePicker-js使用" class="headerlink" title="WdatePicker.js使用"></a><a href="https://blog.csdn.net/nnn_net/article/details/50340929" target="_blank" rel="noopener">WdatePicker.js</a>使用</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码如下：</span></span><br><span class="line">&lt;input id=<span class="string">"startTime"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"Wdate m-letf3"</span> readonly=<span class="string">"readonly"</span> type=<span class="string">"text"</span> onFocus=<span class="string">"WdatePicker(&#123; dateFmt: 'yyyy-MM-dd HH:mm:ss',maxDate:'#F&#123;$dp.$D(\'endTime\',&#123;d:-7&#125;)&#125;'&#125;)"</span>/&gt;</span><br><span class="line">&lt;input id=<span class="string">"endTime"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"Wdate"</span> readonly=<span class="string">"readonly"</span> type=<span class="string">"text"</span> onFocus=<span class="string">"WdatePicker(&#123; dateFmt: 'yyyy-MM-dd HH:mm:ss' ,minDate:'#F&#123;$dp.$D(\'startTime\')&#125;',maxDate:'#F&#123;$dp.$D(\'startTime\',&#123;d:7&#125;)&#125;'&#125;)"</span>/&gt;</span><br><span class="line"><span class="comment">//显示年月日时分秒:onFocus="WdatePicker(&#123; dateFmt: 'yyyy-MM-dd HH:mm:ss'&#125;)"</span></span><br><span class="line"><span class="comment">//结束时间为开始时间七天以内:startTime--maxDate:'#F&#123;$dp.$D(\'endTime\',&#123;d:-7&#125;)&#125;'</span></span><br><span class="line"><span class="comment">// endTime--minDate:'#F&#123;$dp.$D(\'startTime\')&#125;',maxDate:'#F&#123;$dp.$D(\'startTime\',&#123;d:7&#125;)&#125;'</span></span><br></pre></td></tr></table></figure>
+<h5 id="使用toFixed-函数时，出现“toFixed-is-not-a-function”的解决办法"><a href="#使用toFixed-函数时，出现“toFixed-is-not-a-function”的解决办法" class="headerlink" title="使用toFixed()函数时，出现“toFixed() is not a function”的解决办法"></a>使用toFixed()函数时，出现“toFixed() is not a function”的解决办法</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> item.price<span class="comment">//string</span></span><br><span class="line"><span class="comment">//toFixed只能针对数字类型才能使用，所以对于字符类型的要用parseFloat或者parseInt函数先转一下再调用</span></span><br><span class="line"><span class="built_in">parseInt</span>(item.price).toFixed(<span class="number">2</span>)<span class="comment">//item.price=34.000 -- 34.00</span></span><br></pre></td></tr></table></figure>
+<h6 id="js获取当前时间的前一天-后一天"><a href="#js获取当前时间的前一天-后一天" class="headerlink" title="js获取当前时间的前一天/后一天"></a>js获取当前时间的前一天/后一天</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> now=<span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">var</span> preDate = <span class="keyword">new</span> <span class="built_in">Date</span>(now.getTime() - <span class="number">24</span>*<span class="number">60</span>*<span class="number">60</span>*<span class="number">1000</span>); <span class="comment">//前一天</span></span><br><span class="line"><span class="keyword">var</span> nextDate = <span class="keyword">new</span> <span class="built_in">Date</span>(now.getTime() + <span class="number">24</span>*<span class="number">60</span>*<span class="number">60</span>*<span class="number">1000</span>); <span class="comment">//后一天</span></span><br></pre></td></tr></table></figure>
+<h5 id="try-catch"><a href="#try-catch" class="headerlink" title="try catch"></a>try catch</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//背景--url跳转中文参数编码，由于未登录先去登录站点登录，进行了二次编码，导致获取url中文参数乱码问题</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    tryCode - 尝试执行代码块</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(err) &#123;</span><br><span class="line">    catchCode - 捕获错误的代码块</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">finally</span> &#123;</span><br><span class="line">    finallyCode - 无论 <span class="keyword">try</span> / <span class="keyword">catch</span> 结果如何都会执行的代码块</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//demo</span></span><br><span class="line"><span class="comment">// 获取URL对应参数值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUrlParam</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|&amp;)"</span>+ name +<span class="string">"=([^&amp;]*)(&amp;|$)"</span>); <span class="comment">//构造一个含有目标参数的正则表达式对象</span></span><br><span class="line">    <span class="keyword">var</span> r = <span class="built_in">window</span>.location.search.substr(<span class="number">1</span>).match(reg);  <span class="comment">//匹配目标参数</span></span><br><span class="line">    <span class="keyword">if</span> (r!=<span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">decodeURI</span>(r[<span class="number">2</span>]); <span class="comment">//报错执行catch下得代码</span></span><br><span class="line">        &#125;<span class="keyword">catch</span>(e)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">unescape</span>(r[<span class="number">2</span>])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>; <span class="comment">//返回参数值</span></span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="限制input输入数字且小数点后最多n位"><a href="#限制input输入数字且小数点后最多n位" class="headerlink" title="限制input输入数字且小数点后最多n位"></a>限制input输入数字且小数点后最多n位</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">num</span>(<span class="params">value,length</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//length代表可以输入得小数位数</span></span><br><span class="line">    value = value.replace(<span class="regexp">/[^\d.]/g</span>, <span class="string">""</span>);  <span class="comment">//清除“数字”和“.”以外的字符</span></span><br><span class="line">    value = value.replace(<span class="regexp">/\.&#123;2,&#125;/g</span>, <span class="string">"."</span>); <span class="comment">//只保留第一个. 清除多余的</span></span><br><span class="line">    value = value.replace(<span class="string">"."</span>, <span class="string">"$#$"</span>).replace(<span class="regexp">/\./g</span>, <span class="string">""</span>).replace(<span class="string">"$#$"</span>, <span class="string">"."</span>);</span><br><span class="line">    <span class="keyword">var</span> str=<span class="string">'^(\\-)*(\\d+)\\.([0-9]&#123;1,'</span>+length+<span class="string">'&#125;).*$'</span>;<span class="comment">//给正则表达式代入动态参数 ，注意--反斜杠需要转义</span></span><br><span class="line">    <span class="keyword">var</span> reg=<span class="keyword">new</span> <span class="built_in">RegExp</span>(str);</span><br><span class="line">    value = value.replace(reg,<span class="string">'$1$2.$3'</span>);<span class="comment">//只能输入两个小数-- reg=/^(\-)*(\d+)\.([0-9]&#123;1,2&#125;).*$/</span></span><br><span class="line">    <span class="keyword">if</span> (value.indexOf(<span class="string">"."</span>) &lt; <span class="number">0</span> &amp;&amp; value != <span class="string">""</span>) &#123;<span class="comment">//以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额</span></span><br><span class="line">       value = <span class="built_in">parseFloat</span>(value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> value</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//使用：如果小数后面五位则num(this.value,5)</span></span><br><span class="line">&lt;input placeholder=<span class="string">""</span> onkeyup=<span class="string">"this.value=num(this.value,2)"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="限制input输入数字且小数点后最多n位-第一位不能是小数点"><a href="#限制input输入数字且小数点后最多n位-第一位不能是小数点" class="headerlink" title="限制input输入数字且小数点后最多n位(第一位不能是小数点)"></a>限制input输入数字且小数点后最多n位(第一位不能是小数点)</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">num</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    obj.value = obj.value.replace(<span class="regexp">/[^\d.]/g</span>, <span class="string">""</span>); <span class="comment">//清除"数字"和"."以外的字符</span></span><br><span class="line">    obj.value = obj.value.replace(<span class="regexp">/^\./g</span>, <span class="string">""</span>); <span class="comment">//验证第一个字符是数字</span></span><br><span class="line">    obj.value = obj.value.replace(<span class="regexp">/\.&#123;2,&#125;/g</span>, <span class="string">"."</span>); <span class="comment">//只保留第一个".", 清除多余的</span></span><br><span class="line">    obj.value = obj.value.replace(<span class="string">"."</span>, <span class="string">"$#$"</span>).replace(<span class="regexp">/\./g</span>, <span class="string">""</span>).replace(<span class="string">"$#$"</span>, <span class="string">"."</span>);</span><br><span class="line">    obj.value = obj.value.replace(<span class="regexp">/^(\-)*(\d+)\.(\d).*$/</span>, <span class="string">'$1$2.$3'</span>); <span class="comment">//只能输入一个小数</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//两位小数</span></span><br><span class="line">obj.value = obj.value.replace(<span class="regexp">/^(\-)*(\d+)\.(\d\d).*$/</span>, <span class="string">'$1$2.$3'</span>); <span class="comment">//添加 \d 即为小数位数</span></span><br><span class="line"><span class="comment">//使用</span></span><br><span class="line">&lt;input  placeholder=<span class="string">""</span> onkeyup=<span class="string">"num(this)"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="测试环境线上环境接口域名不同"><a href="#测试环境线上环境接口域名不同" class="headerlink" title="测试环境线上环境接口域名不同"></a>测试环境线上环境接口域名不同</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#获取协议 域名端口 拼接请求url</span><br><span class="line"><span class="string">`<span class="subst">$&#123;location.protocol&#125;</span>//<span class="subst">$&#123;location.host&#125;</span>`</span></span><br><span class="line"><span class="string">`<span class="subst">$&#123;location.protocol&#125;</span>//<span class="subst">$&#123;location.host&#125;</span>/api/getInfo`</span></span><br></pre></td></tr></table></figure>
+<h5 id="js返回上一页并刷新页面"><a href="#js返回上一页并刷新页面" class="headerlink" title="js返回上一页并刷新页面"></a>js返回上一页并刷新页面</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//&lt;a href="#" onclick="self.location=document.referrer;"&gt;返回&lt;/a&gt;</span></span><br><span class="line">self.location=<span class="built_in">document</span>.referrer</span><br></pre></td></tr></table></figure>
+<h5 id="当前时间是否符合某时间区间判断-跨天"><a href="#当前时间是否符合某时间区间判断-跨天" class="headerlink" title="当前时间是否符合某时间区间判断(跨天)"></a>当前时间是否符合某时间区间判断(跨天)</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">let</span> timeList = [<span class="string">'09:00'</span>, <span class="string">"01:00"</span>];</span><br><span class="line">            checkTime(...timeList)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">checkTime</span>(<span class="params">startTime, endTime</span>) </span>&#123;</span><br><span class="line">            <span class="comment">//console.log(startTime, endTime);</span></span><br><span class="line">            <span class="comment">//let now = new Date('2018-09-19 0:00').getTime();</span></span><br><span class="line">            <span class="keyword">let</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</span><br><span class="line">            <span class="keyword">let</span> start = <span class="keyword">new</span> <span class="built_in">Date</span>().setHours(startTime.split(<span class="string">':'</span>)[<span class="number">0</span>], startTime.split(<span class="string">':'</span>)[<span class="number">1</span>], <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">let</span> end = <span class="keyword">new</span> <span class="built_in">Date</span>().setHours(endTime.split(<span class="string">':'</span>)[<span class="number">0</span>], endTime.split(<span class="string">':'</span>)[<span class="number">1</span>], <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">if</span> (end &lt; start) &#123;<span class="comment">//end小于start表示是跨天区间</span></span><br><span class="line">                end += <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span><span class="comment">//end加上一天</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (start &lt; now &amp;&amp; now &lt; end) &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">`在符合时间段内`</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">`不在符合的时间段内,时间段为<span class="subst">$&#123;startTime&#125;</span>-<span class="subst">$&#123;endTime&#125;</span>`</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="input限制只能输入纯数字问题"><a href="#input限制只能输入纯数字问题" class="headerlink" title="input限制只能输入纯数字问题"></a>input限制只能输入纯数字问题</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、onkeyup = <span class="string">"value=value.replace(/[^\d]/g,'')"</span></span><br><span class="line">=&gt; 使用 onkeyup 事件，有 bug ，那就是在中文输入法状态下，输入汉字之后直接回车，会直接输入字母</span><br><span class="line"><span class="number">2</span>、onchange = <span class="string">"value=value.replace(/[^\d]/g,'')"</span></span><br><span class="line">=&gt;使用 onchange 事件，在输入内容后，只有 input 丧失焦点时才会得到结果，并不能在输入时就做出响应</span><br><span class="line"><span class="number">3</span>、oninput = <span class="string">"value=value.replace(/[^\d]/g,'')"</span></span><br><span class="line">=&gt;使用 oninput 事件，完美的解决了以上两种问题，测试暂时还没有出现其它问题。</span><br></pre></td></tr></table></figure>
+<h5 id="window-open在ajax请求完成新窗口被拦截的问题"><a href="#window-open在ajax请求完成新窗口被拦截的问题" class="headerlink" title="window.open在ajax请求完成新窗口被拦截的问题"></a>window.open在ajax请求完成新窗口被拦截的问题</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解决--先通过用户点击打开一个新的空白窗口，然后再对新打开的页面进行重定向。</span></span><br><span class="line">        <span class="keyword">var</span> newOpen=<span class="built_in">window</span>.open();</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            type: <span class="string">"GET"</span>,</span><br><span class="line">            url: url,</span><br><span class="line">            data: data,</span><br><span class="line">            contentType: <span class="string">"application/json; charset=UTF-8"</span>,</span><br><span class="line">            dataType: <span class="string">"json"</span>,</span><br><span class="line">            success: <span class="function"><span class="keyword">function</span> (<span class="params">resp</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (resp.success) &#123;</span><br><span class="line">                    newOpen.location.href = baseServiceUrl + <span class="string">"shPayment?orderId="</span> + resp.orderId;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                  <span class="built_in">console</span>.log(<span class="string">'请求失败'</span>)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="WebUploader上传图片删除以后再上传同一张图片-提示超过大小限制（限制：10M，图：9M）"><a href="#WebUploader上传图片删除以后再上传同一张图片-提示超过大小限制（限制：10M，图：9M）" class="headerlink" title="WebUploader上传图片删除以后再上传同一张图片 提示超过大小限制（限制：10M，图：9M）"></a>WebUploader上传图片删除以后再上传同一张图片 提示超过大小限制（限制：10M，图：9M）</h5><p> <a href="http://fex.baidu.com/webuploader/doc/index.html#WebUploader_Uploader_events" target="_blank" rel="noopener">WebUploader API</a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">getFiles</span><br><span class="line">getFiles() ⇒ <span class="built_in">Array</span></span><br><span class="line">getFiles( status1, status2, status... ) ⇒ <span class="built_in">Array</span></span><br><span class="line">返回指定状态的文件集合，不传参数将返回所有状态的文件。</span><br><span class="line"></span><br><span class="line">这里的状态如下：</span><br><span class="line"></span><br><span class="line">File.Status</span><br><span class="line">文件状态值，具体包括以下几种类型：</span><br><span class="line"></span><br><span class="line">-inited 初始状态</span><br><span class="line">-queued 已经进入队列, 等待上传</span><br><span class="line">-progress 上传中</span><br><span class="line">-complete 上传完成。</span><br><span class="line">-error 上传出错，可重试</span><br><span class="line">-interrupt 上传中断，可续传。</span><br><span class="line">-invalid 文件不合格，不能重试上传。会自动从队列中移除。</span><br><span class="line">-cancelled 文件被移除。</span><br><span class="line">就是说，只要我们的uploader对象没有重新创建，那它会保存所有选择的文件，</span><br><span class="line"></span><br><span class="line">当然我们也有方法，clear一下， 我们看到有这样的方法：</span><br><span class="line"></span><br><span class="line">removeFile</span><br><span class="line">removeFile( file ) ⇒ <span class="literal">undefined</span></span><br><span class="line">removeFile( id ) ⇒ <span class="literal">undefined</span></span><br><span class="line">removeFile( file, <span class="literal">true</span> ) ⇒ <span class="literal">undefined</span></span><br><span class="line">removeFile( id, <span class="literal">true</span> ) ⇒ <span class="literal">undefined</span></span><br><span class="line">参数:</span><br><span class="line"></span><br><span class="line">file &#123;File, id&#125;</span><br><span class="line">File对象或这File对象的id</span><br><span class="line"></span><br><span class="line">移除某一文件, 默认只会标记文件状态为已取消，如果第二个参数为 <span class="literal">true</span> 则会从 queue 中移除。</span><br><span class="line"></span><br><span class="line">当我们调用了一下removeFile方法后，只是标记了一下这个文件的状态，我们用getFiles方法，其实还是可以看到，</span><br><span class="line"></span><br><span class="line">这时我们可以再调用方法：</span><br><span class="line"></span><br><span class="line">reset</span><br><span class="line">reset() ⇒ <span class="literal">undefined</span></span><br><span class="line">重置uploader。目前只重置了队列。就可以清除勾选的上传文件了</span><br><span class="line"></span><br><span class="line">在uploadSuccess事件中，调用removeFile方法，注意这个事件也是针对一个文件的</span><br><span class="line"><span class="comment">//成功事件,  针对一个文件</span></span><br><span class="line">uploader.on(<span class="string">'uploadSuccess'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">file, response</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">　　uploader.removeFile(file);</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">在uploadFinished事件中，调用reset方法，就可清空getfiles了</span><br><span class="line"><span class="comment">// 所有文件上传成功后调用        </span></span><br><span class="line">uploader.on(<span class="string">'uploadFinished'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//清空队列</span></span><br><span class="line">     uploader.reset();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//uploader pick自动生成的上传按钮位置不对（应包含在wrap内却在body中）</span></span><br><span class="line"> uploader = WebUploader.create(&#123;</span><br><span class="line">        auto: <span class="literal">true</span>,</span><br><span class="line">        pick: &#123;</span><br><span class="line">            id: <span class="string">'#filePicker'</span>,</span><br><span class="line">            label: <span class="string">'上传图片'</span>,</span><br><span class="line">            multiple: <span class="literal">false</span></span><br><span class="line">        &#125;,</span><br><span class="line">        paste: <span class="built_in">document</span>.body,</span><br><span class="line"></span><br><span class="line">        accept: &#123;</span><br><span class="line">            title: <span class="string">'Images'</span>,</span><br><span class="line">            extensions: <span class="string">'gif,jpg,bmp,png,jpeg'</span>,</span><br><span class="line">            mimeTypes: <span class="string">'image/gif,image/jpg,image/bmp,image/png,image/jpeg'</span></span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        <span class="comment">// swf文件路径</span></span><br><span class="line">        swf: <span class="string">'./swf/uploader.swf'</span>,</span><br><span class="line"></span><br><span class="line">        disableGlobalDnd: <span class="literal">true</span>,</span><br><span class="line">        timeout: <span class="number">0</span>,</span><br><span class="line">        chunked: <span class="literal">false</span>,</span><br><span class="line">        chunkSize: <span class="number">10</span> * <span class="number">1024</span> * <span class="number">1024</span>,</span><br><span class="line">        server: <span class="string">'/api/UploadFile'</span>,</span><br><span class="line">        fileNumLimit: <span class="number">1</span>,</span><br><span class="line">        fileSizeLimit: <span class="number">10</span> * <span class="number">1024</span> * <span class="number">1024</span>, <span class="comment">// 10 M</span></span><br><span class="line">        fileSingleSizeLimit: <span class="number">10</span> * <span class="number">1024</span> * <span class="number">1024</span> <span class="comment">// 10 M</span></span><br><span class="line">    &#125;);</span><br><span class="line"><span class="comment">//uploader初始化以后调用</span></span><br><span class="line">    uploader.refresh();</span><br></pre></td></tr></table></figure></p>
+<h5 id="获取图片img的真实宽高大小"><a href="#获取图片img的真实宽高大小" class="headerlink" title="获取图片img的真实宽高大小"></a>获取图片img的真实宽高大小</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取图片真实高度</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getImageSize</span>(<span class="params">url,callback</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">    img.src = url;</span><br><span class="line">    <span class="comment">// 如果图片被缓存，则直接返回缓存数据</span></span><br><span class="line">    <span class="keyword">if</span>(img.complete)&#123;</span><br><span class="line">        callback(img.width, img.height);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            callback(img.width, img.height);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//调用：</span></span><br><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> imgSrc = $(<span class="string">"#img"</span>).attr(<span class="string">"src"</span>);</span><br><span class="line">    getImageSize(imgSrc,<span class="function"><span class="keyword">function</span>(<span class="params">w,h</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(&#123;<span class="attr">width</span>:w,<span class="attr">height</span>:h&#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">w--图片的宽 h--图片的高</span><br></pre></td></tr></table></figure>
+<h5 id="时间问题"><a href="#时间问题" class="headerlink" title="时间问题"></a>时间问题</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断时间是否是当天</span></span><br><span class="line"><span class="keyword">var</span> str = <span class="number">1404172800000</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">Date</span>(str).toDateString() === <span class="keyword">new</span> <span class="built_in">Date</span>().toDateString()) &#123;</span><br><span class="line">    <span class="comment">//今天</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">Date</span>(str) &lt; <span class="keyword">new</span> <span class="built_in">Date</span>())&#123;</span><br><span class="line">    <span class="comment">//之前</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>(str).toISOString().slice(<span class="number">0</span>,<span class="number">10</span>));<span class="comment">//2014-07-01</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//判断当前时间是否是一天内，超过一天不超过三十天，超过三十天</span></span><br><span class="line">showTime(sendTime) &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(sendTime);    <span class="comment">//"2019-01-08T10:49:29"</span></span><br><span class="line">		<span class="keyword">let</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime(); <span class="comment">//当前时间戳</span></span><br><span class="line">		<span class="keyword">let</span> orderTime = <span class="keyword">new</span> <span class="built_in">Date</span>(sendTime).getTime(); <span class="comment">//订单最后会话时间</span></span><br><span class="line">		<span class="keyword">let</span> oneday = <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span>,</span><br><span class="line">			month = <span class="number">30</span> * <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span>;</span><br><span class="line">		<span class="keyword">if</span> ((now - orderTime) &lt; oneday) &#123;</span><br><span class="line">			sendTime = sendTime.split(<span class="string">'T'</span>)[<span class="number">1</span>]</span><br><span class="line">			<span class="comment">//一天内</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> ((now - orderTime) &gt; oneday || (now - orderTime) &lt; month) &#123;</span><br><span class="line">			<span class="comment">//超过一天 不超过30天</span></span><br><span class="line">			sendTime = <span class="string">`<span class="subst">$&#123;<span class="built_in">Math</span>.ceil((now-orderTime)<span class="regexp">/(24*60*60*1000))&#125;天前`</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">		&#125;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">		if ((now - orderTime) &gt; month) &#123;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">			/</span><span class="regexp">/超过30天</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">			sendTime = sendTime.replace('T', ' ')</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">		&#125;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">		return sendTime</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">	&#125;</span></span></span></span><br></pre></td></tr></table></figure>
+<h5 id="字符串首尾保留中间星号"><a href="#字符串首尾保留中间星号" class="headerlink" title="字符串首尾保留中间星号"></a>字符串首尾保留中间星号</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseStringToStar</span>(<span class="params">str, len, fixLen</span>) </span>&#123;</span><br><span class="line">	<span class="comment">//str-- 传入的字符串</span></span><br><span class="line">	<span class="comment">//len-- 首尾需保留的长度</span></span><br><span class="line">	<span class="comment">//fixLen --是否固定显示星号数量</span></span><br><span class="line">	<span class="keyword">var</span> starLen = fixLen ? <span class="keyword">new</span> <span class="built_in">Array</span>(fixLen + <span class="number">1</span>).join(<span class="string">'*'</span>) : (str.length &gt; <span class="number">6</span> ? <span class="keyword">new</span> <span class="built_in">Array</span>(str.length - (<span class="number">2</span> * len - <span class="number">1</span>)).join(</span><br><span class="line">		<span class="string">'*'</span>) : <span class="keyword">new</span> <span class="built_in">Array</span>(str.length -</span><br><span class="line">		(len - <span class="number">1</span>)).join(<span class="string">'*'</span>))</span><br><span class="line">	<span class="keyword">return</span> str.length &gt; <span class="number">6</span> ? str.substr(<span class="number">0</span>, len) + starLen + str.substr(-len) : str.substr(<span class="number">0</span>, len) + starLen</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用</span></span><br><span class="line">## parseStringToStar('278383678@qq.com',3,3)</span><br><span class="line">## "278***com"</span><br><span class="line"></span><br><span class="line">## parseStringToStar('278383678@qq.com',3)</span><br><span class="line">## "278**********com"</span><br><span class="line"></span><br><span class="line">## parseStringToStar('123456',3)</span><br><span class="line">## "123***"</span><br></pre></td></tr></table></figure>
+<h5 id="js正则去除字符串中的中文英文数字"><a href="#js正则去除字符串中的中文英文数字" class="headerlink" title="js正则去除字符串中的中文英文数字"></a>js正则去除字符串中的中文英文数字</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str.match(<span class="regexp">/[a-zA-Z0-9\u4e00-\u9fa5]+/g</span>).join(<span class="string">''</span>);</span><br><span class="line">str.replace(<span class="regexp">/[^\u4e00-\u9fa5a-zA-Z0-9]/g</span>,<span class="string">''</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="js-过滤敏感词-，可将带有标点符号的敏感词过滤掉"><a href="#js-过滤敏感词-，可将带有标点符号的敏感词过滤掉" class="headerlink" title="js 过滤敏感词 ，可将带有标点符号的敏感词过滤掉"></a>js 过滤敏感词 ，可将带有标点符号的敏感词过滤掉</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//简单版本</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">transSensitive</span>(<span class="params">content</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> Sensitive = wordList<span class="comment">//敏感词数组</span></span><br><span class="line">    <span class="keyword">var</span> v = <span class="keyword">new</span> <span class="built_in">RegExp</span>(Sensitive.join(<span class="string">'|'</span>), <span class="string">"gi"</span>);<span class="comment">//将数组转成正则</span></span><br><span class="line">    <span class="keyword">var</span> array = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">    <span class="comment">//将特殊符号的过滤并且保存</span></span><br><span class="line">    content = content.replace(<span class="regexp">/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&amp;|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\&#123;|\&#125;|\;|\:|\"|\'|\,|\&lt;|\.|\&gt;|\/|\?]/g</span>, <span class="function"><span class="keyword">function</span> (<span class="params">s, i</span>) </span>&#123;</span><br><span class="line">        array.push(&#123;</span><br><span class="line">            index: i,</span><br><span class="line">            content: s</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> s.replace(<span class="regexp">/./g</span>, <span class="string">''</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">//将敏感词进行筛选</span></span><br><span class="line">    <span class="built_in">console</span>.log(content, v);</span><br><span class="line">    <span class="keyword">return</span> content.replace(v, <span class="string">'**'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//适用</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filterWords</span>(<span class="params">content</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//敏感词数组--wordList</span></span><br><span class="line">    <span class="keyword">var</span> v = <span class="keyword">new</span> <span class="built_in">RegExp</span>(wordList.join(<span class="string">'|'</span>), <span class="string">"gi"</span>);<span class="comment">//将数组转成正则</span></span><br><span class="line">    <span class="keyword">var</span> array = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">    <span class="comment">//将特殊符号的过滤并且保存</span></span><br><span class="line">    content = content.replace(<span class="regexp">/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&amp;|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\&#123;|\&#125;|\;|\:|\"|\'|\,|\&lt;|\.|\&gt;|\/|\?]/g</span>, <span class="function"><span class="keyword">function</span> (<span class="params">s, i</span>) </span>&#123;</span><br><span class="line">        array.push(&#123;</span><br><span class="line">            index: i,</span><br><span class="line">            content: s</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> s.replace(<span class="regexp">/./g</span>, <span class="string">''</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">//将敏感词进行筛选</span></span><br><span class="line">    <span class="built_in">console</span>.log(content, v);</span><br><span class="line">    <span class="keyword">var</span> output = content.replace(v, <span class="function"><span class="keyword">function</span> (<span class="params">sMatch</span>) </span>&#123;</span><br><span class="line">        <span class="comment">//sMatch 匹配到的敏感词</span></span><br><span class="line">        <span class="keyword">if</span> (sMatch.length &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> sMatch.replace(<span class="regexp">/./g</span>, <span class="string">'*'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> sMatch.replace(<span class="regexp">/./g</span>, <span class="string">'*'</span>);</span><br><span class="line">            <span class="comment">/* return sMatch[0] + sMatch.replace(/./g, '*').substring(0, sMatch.length - 1);//将词的第一个字保留 */</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">var</span> array2 = output.split(<span class="string">''</span>);<span class="comment">//将字符串转成char数组</span></span><br><span class="line">    <span class="built_in">console</span>.log(array, array2);</span><br><span class="line">    <span class="comment">//循环array 将array[i].content 通过array[i].index 插入指定位置 现将array[i].content  应该算是拼接</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">        array2.splice(array[i].index, <span class="number">0</span>, array[i].content);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(array2);</span><br><span class="line">    <span class="keyword">return</span> array2.join(<span class="string">''</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="ajax-contentType"><a href="#ajax-contentType" class="headerlink" title="ajax contentType"></a>ajax contentType</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> application/x-www-form-urlencoded(默认类型)</span><br><span class="line"></span><br><span class="line">如果不指定其他类型的话, 默认是x-www-form-urlencoded, 此类型要求参数传递样式为 key1=value1&amp;key2=value2</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> application/json</span><br><span class="line"></span><br><span class="line">更适合传递大数据的形式, 参数样式就是json格式, 例如&#123;<span class="string">"key1"</span>:<span class="string">"value1"</span>,<span class="string">"key2"</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]&#125;等</span><br></pre></td></tr></table></figure>
+<h5 id="获取最近一周七天（或指定天数）的日期"><a href="#获取最近一周七天（或指定天数）的日期" class="headerlink" title="获取最近一周七天（或指定天数）的日期"></a>获取最近一周七天（或指定天数）的日期</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getBeforeDate</span>(<span class="params">number</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> num = number;</span><br><span class="line">    <span class="keyword">let</span> dateList = [], s;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; number; i++,num--) &#123;</span><br><span class="line">        <span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">        <span class="keyword">let</span> year = date.getFullYear();</span><br><span class="line">        <span class="keyword">let</span> mon = date.getMonth() + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">let</span> day = date.getDate();</span><br><span class="line">        <span class="keyword">if</span> (day &lt;= num) &#123;</span><br><span class="line">            <span class="keyword">if</span> (mon &gt; <span class="number">1</span>) &#123;</span><br><span class="line">                mon = mon - <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                year = year - <span class="number">1</span>;</span><br><span class="line">                mon = <span class="number">12</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        date.setDate(date.getDate() - num);</span><br><span class="line">        year = date.getFullYear();</span><br><span class="line">        mon = (date.getMonth() + <span class="number">1</span>) &lt; <span class="number">10</span> ? <span class="string">`0<span class="subst">$&#123;date.getMonth() + <span class="number">1</span>&#125;</span>`</span> : date.getMonth() + <span class="number">1</span>;</span><br><span class="line">        day = date.getDate() &lt; <span class="number">10</span> ? <span class="string">`0<span class="subst">$&#123;date.getDate()&#125;</span>`</span> : date.getDate();</span><br><span class="line">        <span class="comment">// s = year + '-' + (mon &lt; 10 ? ('0' + mon) : mon) + '-' + (day &lt; 10 ? ('0' + day) : day);</span></span><br><span class="line">        s = <span class="string">`<span class="subst">$&#123;mon&#125;</span><span class="subst">$&#123;day&#125;</span>`</span></span><br><span class="line">        dateList.push(s)</span><br><span class="line">        <span class="comment">// num-=1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dateList;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用</span></span><br><span class="line">## getBeforeDate(7) //获取最近一周七天的日期</span><br><span class="line">## 返回结果 Array: ["1016", "1017", "1018", "1019", "1020", "1021", "1022"]</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+    
+      <div>
+        <script src="https://giscus.app/client.js" data-repo="Shadownc/getComment" data-repo-id="R_kgDOKDNmJA" data-category="Announcements" data-category-id="DIC_kwDOKDNmJM4CYVsf" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
+        </script>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/assets/images/shadow_qrcode.jpg" alt="shadow wechat" style="width: 200px; max-width: 100%;">
+    <div>扫一扫，关注微信公众号。</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/10/23/常用方法封装/" rel="next" title="常用方法封装">
+                <i class="fa fa-chevron-left"></i> 常用方法封装
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/06/21/JS奇技淫巧/" rel="prev" title="JS奇技淫巧">
+                JS奇技淫巧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/assets/images/logo.jpg" alt="shadow">
+            
+              <p class="site-author-name" itemprop="name">shadow</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Shadownc" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/99bcb857e7e4" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#onclick事件传递对象参数"><span class="nav-number">1.</span> <span class="nav-text">onclick事件传递对象参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ajax-post方法参数问题"><span class="nav-number">2.</span> <span class="nav-text">ajax post方法参数问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#switch-data"><span class="nav-number">3.</span> <span class="nav-text">switch(data){}</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#WdatePicker-js使用"><span class="nav-number">4.</span> <span class="nav-text">WdatePicker.js使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用toFixed-函数时，出现“toFixed-is-not-a-function”的解决办法"><span class="nav-number">5.</span> <span class="nav-text">使用toFixed()函数时，出现“toFixed() is not a function”的解决办法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#js获取当前时间的前一天-后一天"><span class="nav-number">5.1.</span> <span class="nav-text">js获取当前时间的前一天/后一天</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#try-catch"><span class="nav-number">6.</span> <span class="nav-text">try catch</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#限制input输入数字且小数点后最多n位"><span class="nav-number">7.</span> <span class="nav-text">限制input输入数字且小数点后最多n位</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#限制input输入数字且小数点后最多n位-第一位不能是小数点"><span class="nav-number">8.</span> <span class="nav-text">限制input输入数字且小数点后最多n位(第一位不能是小数点)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#测试环境线上环境接口域名不同"><span class="nav-number">9.</span> <span class="nav-text">测试环境线上环境接口域名不同</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#js返回上一页并刷新页面"><span class="nav-number">10.</span> <span class="nav-text">js返回上一页并刷新页面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#当前时间是否符合某时间区间判断-跨天"><span class="nav-number">11.</span> <span class="nav-text">当前时间是否符合某时间区间判断(跨天)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#input限制只能输入纯数字问题"><span class="nav-number">12.</span> <span class="nav-text">input限制只能输入纯数字问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#window-open在ajax请求完成新窗口被拦截的问题"><span class="nav-number">13.</span> <span class="nav-text">window.open在ajax请求完成新窗口被拦截的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#WebUploader上传图片删除以后再上传同一张图片-提示超过大小限制（限制：10M，图：9M）"><span class="nav-number">14.</span> <span class="nav-text">WebUploader上传图片删除以后再上传同一张图片 提示超过大小限制（限制：10M，图：9M）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取图片img的真实宽高大小"><span class="nav-number">15.</span> <span class="nav-text">获取图片img的真实宽高大小</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#时间问题"><span class="nav-number">16.</span> <span class="nav-text">时间问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#字符串首尾保留中间星号"><span class="nav-number">17.</span> <span class="nav-text">字符串首尾保留中间星号</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#js正则去除字符串中的中文英文数字"><span class="nav-number">18.</span> <span class="nav-text">js正则去除字符串中的中文英文数字</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#js-过滤敏感词-，可将带有标点符号的敏感词过滤掉"><span class="nav-number">19.</span> <span class="nav-text">js 过滤敏感词 ，可将带有标点符号的敏感词过滤掉</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ajax-contentType"><span class="nav-number">20.</span> <span class="nav-text">ajax contentType</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取最近一周七天（或指定天数）的日期"><span class="nav-number">21.</span> <span class="nav-text">获取最近一周七天（或指定天数）的日期</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">by shadow</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"live2d-widget-model-z16"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/logo.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/logo.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/logo.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/assets/images/logo.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="记录一些常用的正则表达式">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则Collect..">
+<meta property="og:url" content="https://shadownc.github.io/2018/01/29/正则Collect/index.html">
+<meta property="og:site_name" content="Shadownc">
+<meta property="og:description" content="记录一些常用的正则表达式">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2023-08-06T05:42:18.206Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="正则Collect..">
+<meta name="twitter:description" content="记录一些常用的正则表达式">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shadownc.github.io/2018/01/29/正则Collect/">
+
+
+
+
+
+  <title>正则Collect.. | Shadownc</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e912005b8908a4cb8be7580e51860d67";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  <script src="/live2d-widget/autoload.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shadownc</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br>
+            
+            友链
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shadownc.github.io/2018/01/29/正则Collect/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="shadow">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/assets/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shadownc">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">正则Collect..</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-29T11:17:31+00:00">
+                2018-01-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>记录一些常用的正则表达式<br><a id="more"></a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> reg;</span><br><span class="line"><span class="comment">//数字最多两位小数</span></span><br><span class="line">reg=<span class="regexp">/^\d[-+]?\d*[.]?\d&#123;0,2&#125;$/</span>;</span><br><span class="line"><span class="comment">//数字最多一位小数</span></span><br><span class="line">reg=<span class="regexp">/^\d[-+]?\d*[.]?\d&#123;0,1&#125;$/</span>;</span><br><span class="line"><span class="comment">//qq号验证</span></span><br><span class="line"><span class="comment">//^表示不匹配。d表示任意数字，&#123;5,10&#125;表示长度为5到10。   </span></span><br><span class="line">reg=<span class="regexp">/^\d&#123;5,10&#125;$/</span>;</span><br><span class="line"><span class="comment">//e-mail</span></span><br><span class="line">reg=<span class="regexp">/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/</span>;</span><br><span class="line"><span class="comment">//手机号码，支持17开头</span></span><br><span class="line">reg=<span class="regexp">/^0?(13[0-9]|15[012356789]|17[013678]|18[0-9]|14[57])[0-9]&#123;8&#125;$/</span>;</span><br><span class="line"><span class="comment">//固话号码，支持400 或 800开头</span></span><br><span class="line">reg= <span class="regexp">/^0?(13[0-9]|15[012356789]|17[013678]|18[0-9]|14[57])[0-9]&#123;8&#125;$/</span>;</span><br><span class="line"><span class="comment">//手机号码、固话号码</span></span><br><span class="line">reg=<span class="regexp">/^(0?(13[0-9]|15[012356789]|17[013678]|18[0-9]|14[57])[0-9]&#123;8&#125;)|(400|800)([0-9\\-]&#123;7,10&#125;)|(([0-9]&#123;4&#125;|[0-9]&#123;3&#125;)(-| )?)?([0-9]&#123;7,8&#125;)((-| |转)*([0-9]&#123;1,4&#125;))?$/</span>;</span><br><span class="line"><span class="comment">//微信号</span></span><br><span class="line">reg=<span class="regexp">/^[a-zA-Z]&#123;1&#125;[-_a-zA-Z0-9]&#123;5,19&#125;$/</span>;</span><br><span class="line"><span class="comment">//只能输入中文,字母,数字</span></span><br><span class="line">reg=<span class="regexp">/^[\u4e00-\u9fa5_a-zA-Z0-9]+$/</span></span><br><span class="line"><span class="comment">//只能输入中文,字母</span></span><br><span class="line">reg=<span class="regexp">/^[\u4e00-\u9fa5_a-zA-Z]+$/</span></span><br><span class="line"><span class="comment">//只能输入中文,字母并限制长度</span></span><br><span class="line"><span class="comment">//&#123;1,10&#125;最短1位 最长10位</span></span><br><span class="line">reg=<span class="regexp">/^[\u4e00-\u9fa5_a-zA-Z]&#123;1,10&#125;$/</span></span><br><span class="line"><span class="comment">//匹配空格</span></span><br><span class="line">reg=<span class="regexp">/^ +| +$/g</span></span><br><span class="line"><span class="comment">//首位三位显示，中间星号</span></span><br><span class="line">reg=<span class="regexp">/^(\d&#123;3&#125;)\d+(\d&#123;3&#125;)$/</span></span><br><span class="line"><span class="comment">//'13066666666'.replace(/^(\d&#123;3&#125;)\d+(\d&#123;3&#125;)$/,'$1***$2') -- 130***666</span></span><br><span class="line"><span class="comment">//匹配前后空格，中间可以有空格</span></span><br><span class="line">reg=<span class="regexp">/^\s+|\s+$/g</span></span><br><span class="line"><span class="comment">// /^\s+|\s+$/g.test('123')--false  /^\s+|\s+$/g.test('  123')--true /^\s+|\s+$/g.test('1  23')--false</span></span><br><span class="line"><span class="comment">// /^\s+|\s+$/g.test('   1  23  ')--true  /^\s+|\s+$/g.test('123  ')--true</span></span><br><span class="line"><span class="comment">//去除HTML Tag,但不去除换行标签&lt;br&gt;</span></span><br><span class="line">reg=<span class="regexp">/&lt;(?!\/?br\/?.+?&gt;)[^&lt;&gt;]*&gt;/g</span></span><br><span class="line"><span class="comment">// str.replace(/&lt;(?!\/?br\/?.+?&gt;)[^&lt;&gt;]*&gt;/g, '');</span></span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><p>数字包含小数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^\d+(?=\.&#123;<span class="number">0</span>,<span class="number">1</span>&#125;\d+$|$)/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>手机号</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^(?:(?:\+|<span class="number">00</span>)<span class="number">86</span>)?<span class="number">1</span>(?:(?:<span class="number">3</span>[\d])|(?:<span class="number">4</span>[<span class="number">5</span><span class="number">-79</span>])|(?:<span class="number">5</span>[<span class="number">0</span><span class="number">-35</span><span class="number">-9</span>])|(?:<span class="number">6</span>[<span class="number">5</span><span class="number">-7</span>])|(?:<span class="number">7</span>[<span class="number">0</span><span class="number">-8</span>])|(?:<span class="number">8</span>[\d])|(?:<span class="number">9</span>[<span class="number">189</span>]))\d&#123;<span class="number">8</span>&#125;$/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>密码强度</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 密码中必须包含大小写 字母、数字、特称字符，至少<span class="number">8</span>个字符，最多<span class="number">30</span>个字符(不限制字符删除<span class="number">30</span>即可)</span><br><span class="line">/^(?=.*[<span class="number">0</span><span class="number">-9</span>])(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0<span class="number">-9</span>])&#123;<span class="number">8</span>,<span class="number">30</span>&#125;$/</span><br><span class="line"><span class="number">2.</span> 密码中必须包含字母（不区分大小写）、数字、特称字符，至少<span class="number">8</span>个字符，最多<span class="number">30</span>个字符</span><br><span class="line"><span class="keyword">let</span> Regex = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).&#123;8,30&#125;'</span>);</span><br><span class="line">/(?=.*[<span class="number">0</span><span class="number">-9</span>])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0<span class="number">-9</span>]).&#123;<span class="number">8</span>,<span class="number">30</span>&#125;/</span><br><span class="line"><span class="number">3.</span> 密码中必须包含字母（不区分大小写）、数字，至少<span class="number">8</span>个字符，最多<span class="number">30</span>个字符</span><br><span class="line"><span class="keyword">let</span> Regex = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'(?=.*[0-9])(?=.*[a-zA-Z]).&#123;8,30&#125;'</span>)</span><br><span class="line">/(?=.*[<span class="number">0</span><span class="number">-9</span>])(?=.*[a-zA-Z]).&#123;<span class="number">8</span>,<span class="number">30</span>&#125;/</span><br><span class="line">4. 可指定特殊字符(.和#手动添加不添加则.和#不算特殊字符)</span><br><span class="line">/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&amp;.#])[A-Za-z\d@$!%*?&amp;.#]&#123;8,&#125;$/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>去除字符串中的标签</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span>  str = <span class="string">"ALEOD&lt;u&gt;1233451&lt;/u&gt;"</span></span><br><span class="line"><span class="keyword">let</span> res =str.replace(<span class="regexp">/&lt;.*?&gt;/ig</span>,<span class="string">""</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>去除字符串中的br标签</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.replace(<span class="regexp">/&lt;br\s*\/?&gt;/g</span>, <span class="string">""</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>去除字符串中指定标签</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">replace(<span class="regexp">/&lt;\/?.+?\/?&gt;/g</span>,<span class="string">''</span>)</span><br><span class="line">replace(<span class="regexp">/&lt;\/?div+?\/?&gt;/g</span>,<span class="string">''</span>)</span><br><span class="line">replace(<span class="regexp">/&lt;\/?u+?\/?&gt;/g</span>,<span class="string">''</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>去除空格</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.replace(<span class="regexp">/^\s*/g</span>,<span class="string">""</span>) <span class="comment">//去除左边空格</span></span><br><span class="line">.replace(<span class="regexp">/\s*$/g</span>,<span class="string">""</span>) <span class="comment">//去除右边空格</span></span><br><span class="line">.replace(<span class="regexp">/(^\s*)|(\s*$)/g</span>,<span class="string">""</span>) <span class="comment">//去除前后空格</span></span><br><span class="line">.replace(<span class="regexp">/\s+/g</span>,<span class="string">""</span>) <span class="comment">//去除所有空格</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+    
+      <div>
+        <script src="https://giscus.app/client.js" data-repo="Shadownc/getComment" data-repo-id="R_kgDOKDNmJA" data-category="Announcements" data-category-id="DIC_kwDOKDNmJM4CYVsf" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
+        </script>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/assets/images/shadow_qrcode.jpg" alt="shadow wechat" style="width: 200px; max-width: 100%;">
+    <div>扫一扫，关注微信公众号。</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/17/关于Vuex/" rel="next" title="something about Vuex...">
+                <i class="fa fa-chevron-left"></i> something about Vuex...
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/01/判断是否滚动到底部/" rel="prev" title="判断是否滚动到底部">
+                判断是否滚动到底部 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/assets/images/logo.jpg" alt="shadow">
+            
+              <p class="site-author-name" itemprop="name">shadow</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Shadownc" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/99bcb857e7e4" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">by shadow</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"live2d-widget-model-z16"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

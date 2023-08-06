@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/logo.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/logo.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/logo.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/assets/images/logo.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="node,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="linux服务器配置(node环境)">
+<meta name="keywords" content="node">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux服务器配置(node环境)">
+<meta property="og:url" content="https://shadownc.github.io/2018/07/27/linux服务器配置-node环境/index.html">
+<meta property="og:site_name" content="Shadownc">
+<meta property="og:description" content="linux服务器配置(node环境)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2023-08-06T05:42:18.206Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux服务器配置(node环境)">
+<meta name="twitter:description" content="linux服务器配置(node环境)">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shadownc.github.io/2018/07/27/linux服务器配置-node环境/">
+
+
+
+
+
+  <title>linux服务器配置(node环境) | Shadownc</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e912005b8908a4cb8be7580e51860d67";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  <script src="/live2d-widget/autoload.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shadownc</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br>
+            
+            友链
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shadownc.github.io/2018/07/27/linux服务器配置-node环境/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="shadow">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/assets/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shadownc">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">linux服务器配置(node环境)</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-27T17:17:12+00:00">
+                2018-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/node/" itemprop="url" rel="index">
+                    <span itemprop="name">node</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>linux服务器配置(node环境)<br><a id="more"></a></p>
+<h5 id="新建node安装目录，与node项目目录"><a href="#新建node安装目录，与node项目目录" class="headerlink" title="新建node安装目录，与node项目目录"></a>新建node安装目录，与node项目目录</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /www/dev/node <span class="comment">//目录位置可选</span></span><br><span class="line">下载node二进制文件包：</span><br><span class="line"> sudo wget https:<span class="comment">//nodejs.org/dist/v8.11.3/node-v8.11.3-linux-x64.tar.xz //这是目前官网稳定版 后期可自己去官网找</span></span><br><span class="line">解压包命令：</span><br><span class="line"> sudo tar zxvf node-v8<span class="number">.11</span><span class="number">.3</span>-linux-x64.tar.xz --这里有个坑 这个命令会报错</span><br><span class="line">正确解压命令：</span><br><span class="line"> sudo tar xvf node-v8<span class="number">.11</span><span class="number">.3</span>-linux-x64.tar.xz</span><br><span class="line">配置node环境变量：</span><br><span class="line"> sudo vim /etc/profile</span><br><span class="line"> <span class="comment">//按i插入到最下面</span></span><br><span class="line"><span class="keyword">export</span> NODE_HOME=<span class="regexp">/www/</span>dev/node/node-v8<span class="number">.11</span><span class="number">.3</span>-linux-x64 <span class="comment">//node安装目录</span></span><br><span class="line"><span class="keyword">export</span> PATH=$PATH:$NODE_HOME/bin --:冒号是分隔符</span><br><span class="line">编辑完以后按<span class="string">'esc'</span> 输入<span class="string">':wq'</span> 回车保存退出</span><br><span class="line">source /etc/profile --使文件生效</span><br></pre></td></tr></table></figure>
+<h5 id="安装npm"><a href="#安装npm" class="headerlink" title="安装npm"></a>安装npm</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https:<span class="comment">//npmjs.org/install.sh | sh</span></span><br></pre></td></tr></table></figure>
+<h5 id="安装pm2"><a href="#安装pm2" class="headerlink" title="安装pm2"></a>安装pm2</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install前置，需要在/usr/bin目录下 设置node 和npm 的软链,注意要写绝对路径:</span><br><span class="line"> sudo ln -s /www/dev/node/node-v8.11.3-linux-x64/bin/node /usr/bin/node</span><br><span class="line"> sudo ln -s /www/dev/node/node-v8.11.3-linux-x64/bin/npm /usr/bin/npm</span><br><span class="line">//执行完这两步才可以npm install</span><br><span class="line">sudo npm install pm2 -g</span><br><span class="line">同时需要配置pm2的软链  ：sudo ln -s /www/dev/node/node-v8.11.3-linux-x64/bin/pm2 /usr/bin/pm2</span><br></pre></td></tr></table></figure>
+<h6 id="上传并启动项目-已上传忽略"><a href="#上传并启动项目-已上传忽略" class="headerlink" title="上传并启动项目(已上传忽略)"></a>上传并启动项目(已上传忽略)</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install <span class="comment">//安装项目所需依赖</span></span><br><span class="line">启动项目: sudo pm2 start index.js<span class="comment">// -- node index.js</span></span><br><span class="line">停止项目: pm2 stop index.js   或全部杀掉 ：pm2 kill</span><br></pre></td></tr></table></figure>
+<h5 id="安装配置Nginx"><a href="#安装配置Nginx" class="headerlink" title="安装配置Nginx"></a>安装配置Nginx</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//开始前，请确认gcc g++开发类库是否装好，默认已经安装。</span></span><br><span class="line">  whereis gcc</span><br><span class="line"><span class="comment">//进入安装目录</span></span><br><span class="line">  cd /usr/local/src</span><br><span class="line"><span class="comment">//安装PCRE库</span></span><br><span class="line">  wget http:<span class="comment">//zlib.net/zlib-1.2.11.tar.gz</span></span><br><span class="line">  tar zxvf zlib<span class="number">-1.2</span><span class="number">.11</span>.tar.gz</span><br><span class="line">  cd zlib<span class="number">-1.2</span><span class="number">.11</span></span><br><span class="line">  ./configure</span><br><span class="line">  make</span><br><span class="line">  make install</span><br><span class="line"><span class="comment">//安装openssl（某些vps默认没装ssl)</span></span><br><span class="line">  wget https:<span class="comment">//www.openssl.org/source/openssl-1.0.1t.tar.gz</span></span><br><span class="line">  tar -zxvf openssl<span class="number">-1.0</span><span class="number">.1</span>t.tar.gz</span><br><span class="line"><span class="comment">//安装nginx</span></span><br><span class="line">  wget http:<span class="comment">//nginx.org/download/nginx-1.1.10.tar.gz</span></span><br><span class="line">  tar -zxvf nginx<span class="number">-1.1</span><span class="number">.10</span>.tar.gz</span><br><span class="line">  cd nginx<span class="number">-1.1</span><span class="number">.10</span></span><br><span class="line">  ./configure</span><br><span class="line">  make</span><br><span class="line">  make install</span><br><span class="line">--make install可能会报错：make: *** No rule to make target <span class="string">'install'</span>.  Stop.</span><br><span class="line">解决：</span><br><span class="line">ubuntu下--</span><br><span class="line">  apt-<span class="keyword">get</span> install openssl</span><br><span class="line">  apt-<span class="keyword">get</span> install libssl-dev</span><br><span class="line">centos下--</span><br><span class="line">  yum -y install openssl openssl-devel</span><br><span class="line">然后再从./configure开始执行</span><br></pre></td></tr></table></figure>
+<h5 id="启动nginx"><a href="#启动nginx" class="headerlink" title="启动nginx"></a>启动nginx</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查看nginx是否启动:</span></span><br><span class="line">启动：/usr/local/nginx/sbin/nginx</span><br><span class="line">停止：/usr/local/nginx/sbin/nginx -s stop</span><br><span class="line"> ps aux|grep nginx</span><br><span class="line"><span class="comment">//结果:</span></span><br><span class="line">root     <span class="number">124023</span>  <span class="number">0.0</span>  <span class="number">0.0</span>  <span class="number">28732</span>   <span class="number">540</span> ?        Ss   <span class="number">16</span>:<span class="number">59</span>   <span class="number">0</span>:<span class="number">00</span> nginx: master process /usr/local/nginx/sbin/nginx</span><br><span class="line">nobody   <span class="number">124024</span>  <span class="number">0.0</span>  <span class="number">0.2</span>  <span class="number">29132</span>  <span class="number">2536</span> ?        S    <span class="number">16</span>:<span class="number">59</span>   <span class="number">0</span>:<span class="number">00</span> nginx: worker process</span><br><span class="line">root     <span class="number">124048</span>  <span class="number">0.0</span>  <span class="number">0.1</span>  <span class="number">14684</span>  <span class="number">1036</span> pts/<span class="number">0</span>    S+   <span class="number">17</span>:<span class="number">04</span>   <span class="number">0</span>:<span class="number">00</span> grep --color=auto nginx</span><br><span class="line"><span class="comment">//必须有前两个进程 否则启动失败</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//修改了配置文件以后重启nginx</span></span><br><span class="line">/usr/local/nginx/sbin/nginx -s reload --或者进入到nginx安装目录sbin下执行 ./nginx -s reload</span><br><span class="line"><span class="comment">//贴一小段配置代码：</span></span><br><span class="line">server &#123;</span><br><span class="line">        listen       <span class="number">8090</span>;</span><br><span class="line">        server_name  www.shadow.com; #服务器域名</span><br><span class="line"></span><br><span class="line">        #charset koi8-r;</span><br><span class="line"></span><br><span class="line">        #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">           # root   html;</span><br><span class="line">           # index  index.html index.htm;</span><br><span class="line">           proxy_pass http:<span class="comment">//127.0.0.1:3000;</span></span><br><span class="line">           proxy_redirect <span class="keyword">default</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        #error_page  404              /404.html;</span><br><span class="line"></span><br><span class="line">        # redirect server error pages to the static page /50x.html</span><br><span class="line">        #</span><br><span class="line">        error_page   <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span>  /<span class="number">50</span>x.html;</span><br><span class="line">        location = <span class="regexp">/50x.html &#123;</span></span><br><span class="line"><span class="regexp">            root   html;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<h5 id="安装MongoDB"><a href="#安装MongoDB" class="headerlink" title="安装MongoDB"></a>安装MongoDB</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//切换到安装目录</span></span><br><span class="line"> cd /usr/local/soft/  --没有就新建 mkdir soft</span><br><span class="line"><span class="comment">//下载：</span></span><br><span class="line"> curl -O https:<span class="comment">//fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.6.4.tgz</span></span><br><span class="line"><span class="comment">//解压：</span></span><br><span class="line"> tar -zxvf mongodb-linux-x86_64<span class="number">-3.6</span><span class="number">.4</span>.tgz</span><br><span class="line"><span class="comment">//移动到/usr/local/mongodb/目录：</span></span><br><span class="line"> mv mongodb-linux-x86_64<span class="number">-3.6</span><span class="number">.4</span> /usr/local/mongodb</span><br><span class="line"><span class="comment">//编辑环境变量：</span></span><br><span class="line"> vim /etc/profile</span><br><span class="line"><span class="keyword">export</span> MONGODB_HOME=<span class="regexp">/usr/</span>local/mongodb/</span><br><span class="line"><span class="keyword">export</span> PATH=$MONGODB_HOME/bin --添加到之前的node前</span><br><span class="line">source /etc/profile --使之生效</span><br><span class="line"><span class="comment">//切换到新目录的bin目录下：</span></span><br><span class="line"> cd /usr/local/mongodb/bin</span><br><span class="line"><span class="comment">//新建mongodb.conf文件：--touch mongodb.conf</span></span><br><span class="line">#端口号</span><br><span class="line">port=<span class="number">27017</span></span><br><span class="line">#数据目录--没有需要手动创建 mkdir</span><br><span class="line">dbpath=<span class="regexp">/usr/</span>local/mongodb/data/db</span><br><span class="line">#日志目录--没有需要手动创建 mkdir touch</span><br><span class="line">logpath=<span class="regexp">/usr/</span>local/mongodb/log/out.log</span><br><span class="line">#设置后台运行</span><br><span class="line">fork=<span class="literal">true</span></span><br><span class="line">#日志输出方式</span><br><span class="line">logappend=<span class="literal">true</span></span><br><span class="line">#开启认证</span><br><span class="line">#auth=true</span><br><span class="line"><span class="comment">//启动mongodb:</span></span><br><span class="line">./mongod -f mongodb.conf</span><br><span class="line">或者：./mongod -config mongodb.conf</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+    
+      <div>
+        <script src="https://giscus.app/client.js" data-repo="Shadownc/getComment" data-repo-id="R_kgDOKDNmJA" data-category="Announcements" data-category-id="DIC_kwDOKDNmJM4CYVsf" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
+        </script>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/assets/images/shadow_qrcode.jpg" alt="shadow wechat" style="width: 200px; max-width: 100%;">
+    <div>扫一扫，关注微信公众号。</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/node/" rel="tag"># node</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/18/travis-ci配置/" rel="next" title="travis-ci配置">
+                <i class="fa fa-chevron-left"></i> travis-ci配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/01/服务器部署vue-nginx配置/" rel="prev" title="服务器部署vue+nginx配置">
+                服务器部署vue+nginx配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/assets/images/logo.jpg" alt="shadow">
+            
+              <p class="site-author-name" itemprop="name">shadow</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Shadownc" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/99bcb857e7e4" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#新建node安装目录，与node项目目录"><span class="nav-number">1.</span> <span class="nav-text">新建node安装目录，与node项目目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装npm"><span class="nav-number">2.</span> <span class="nav-text">安装npm</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装pm2"><span class="nav-number">3.</span> <span class="nav-text">安装pm2</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#上传并启动项目-已上传忽略"><span class="nav-number">3.1.</span> <span class="nav-text">上传并启动项目(已上传忽略)</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装配置Nginx"><span class="nav-number">4.</span> <span class="nav-text">安装配置Nginx</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#启动nginx"><span class="nav-number">5.</span> <span class="nav-text">启动nginx</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装MongoDB"><span class="nav-number">6.</span> <span class="nav-text">安装MongoDB</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">by shadow</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"live2d-widget-model-z16"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

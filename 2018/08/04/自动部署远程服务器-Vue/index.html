@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/logo.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/logo.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/logo.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/assets/images/logo.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Vue,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Travis自动部署vue打包后的文件到远程服务器">
+<meta name="keywords" content="Vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自动部署远程服务器(Vue)">
+<meta property="og:url" content="https://shadownc.github.io/2018/08/04/自动部署远程服务器-Vue/index.html">
+<meta property="og:site_name" content="Shadownc">
+<meta property="og:description" content="Travis自动部署vue打包后的文件到远程服务器">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2023-08-06T05:42:18.206Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自动部署远程服务器(Vue)">
+<meta name="twitter:description" content="Travis自动部署vue打包后的文件到远程服务器">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shadownc.github.io/2018/08/04/自动部署远程服务器-Vue/">
+
+
+
+
+
+  <title>自动部署远程服务器(Vue) | Shadownc</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e912005b8908a4cb8be7580e51860d67";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  <script src="/live2d-widget/autoload.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shadownc</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br>
+            
+            友链
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shadownc.github.io/2018/08/04/自动部署远程服务器-Vue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="shadow">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/assets/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shadownc">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">自动部署远程服务器(Vue)</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-04T13:29:59+00:00">
+                2018-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Travis自动部署vue打包后的文件到远程服务器<br><a id="more"></a></p>
+<h5 id="生成密钥对"><a href="#生成密钥对" class="headerlink" title="生成密钥对"></a>生成密钥对</h5><p><code>ssh-keygen</code><br>输入上面的指令以后一路回车即可，你会发现在用户根目录下多了.ssh目录，进去看一下<code>cd ~/.ssh</code>，里面有3个文件</p>
+<h5 id="新建config文件"><a href="#新建config文件" class="headerlink" title="新建config文件"></a>新建config文件</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Host test</span><br><span class="line">HostName <span class="number">182.61</span><span class="number">.20</span><span class="number">.24</span> </span><br><span class="line">#登陆的用户名</span><br><span class="line">User root</span><br><span class="line">IdentitiesOnly yes</span><br><span class="line">#登陆使用的密钥</span><br><span class="line">IdentityFile ~<span class="regexp">/.ssh/i</span>d_rsa</span><br></pre></td></tr></table></figure>
+<p>设置.ssh目录为700:<code>chmod 700 ~/.ssh/</code><br>设置.ssh目录下的文件为600:<code>chmod 600 ~/.ssh/*</code></p>
+<h5 id="将生成的公钥添加为受信列表（重点）"><a href="#将生成的公钥添加为受信列表（重点）" class="headerlink" title="将生成的公钥添加为受信列表（重点）"></a>将生成的公钥添加为受信列表（重点）</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat id_rsa.pub &gt;&gt; authorized_keys</span><br><span class="line">cat authorized_keys --查看</span><br><span class="line"># authorized_keys文件内容类似这样</span><br><span class="line">ssh-rsa  *************centos</span><br></pre></td></tr></table></figure>
+<h5 id="服务器安装Travis"><a href="#服务器安装Travis" class="headerlink" title="服务器安装Travis"></a>服务器安装Travis</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#ravis的客户端工具需要用gem来安装，gem是ruby的管理工具，所以首先安装ruby</span><br><span class="line">apt install ruby</span><br><span class="line"># 安装travis命令行工具，如无法使用gem指令须先安装ruby</span><br><span class="line">gem install travis</span><br><span class="line"># --auto自动登录github帐号</span><br><span class="line">travis login --auto</span><br><span class="line"># 此处的--add参数表示自动添加脚本到.travis.yml文件中 必须在项目的根目录执行</span><br><span class="line">travis encrypt-file ~<span class="regexp">/.ssh/i</span>d_rsa --add</span><br><span class="line"># 这个命令会自动把 id_rsa 加密传送到 .git 指定的仓库对应的 travis 中去</span><br><span class="line">注意：</span><br><span class="line">gem install travis 报错can<span class="string">'t find header files for ruby at /usr/lib/ruby/include/ruby.h</span></span><br><span class="line"><span class="string">解决办法：</span></span><br><span class="line"><span class="string">#更换gem的source</span></span><br><span class="line"><span class="string">$ gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/</span></span><br><span class="line"><span class="string">$ gem sources -l</span></span><br><span class="line"><span class="string">*** CURRENT SOURCES ***</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">https://ruby.taobao.org</span></span><br><span class="line"><span class="string"># 请确保只有 ruby.taobao.org</span></span><br><span class="line"><span class="string">#安装ruby-dev</span></span><br><span class="line"><span class="string">apt-get install ruby-dev</span></span><br></pre></td></tr></table></figure>
+<h4 id="上面的并没有成功-具体Travis网页端并没有生成环境变量–有知道得小伙伴可以加群告诉我下：163958730"><a href="#上面的并没有成功-具体Travis网页端并没有生成环境变量–有知道得小伙伴可以加群告诉我下：163958730" class="headerlink" title="上面的并没有成功 具体Travis网页端并没有生成环境变量–有知道得小伙伴可以加群告诉我下：163958730"></a>上面的并没有成功 具体Travis网页端并没有生成环境变量–有知道得小伙伴可以加群告诉我下：163958730</h4><h5 id="另一种方法–rsync"><a href="#另一种方法–rsync" class="headerlink" title="另一种方法–rsync"></a>另一种方法–rsync</h5><p>启动方式：<br><code>rsync --daemon</code><br>创建rsync的主配置文件“/etc/rsyncd.conf”，需要手工来创建，创建该文件并插入如下内容：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># /etc/rsyncd: configuration file for rsync daemon mode</span><br><span class="line"></span><br><span class="line"># See rsyncd.conf man page for more options.</span><br><span class="line"></span><br><span class="line"># configuration example:</span><br><span class="line">uid = root</span><br><span class="line">gid = root</span><br><span class="line">use chroot = no</span><br><span class="line">max connections =<span class="number">4</span></span><br><span class="line">pid file = <span class="regexp">/var/</span>run/rsyncd.pid</span><br><span class="line">log file = <span class="regexp">/var/</span>log/rsyncd.log</span><br><span class="line">lock file = <span class="regexp">/var/</span>run/rsyncd.lock</span><br><span class="line"></span><br><span class="line">#设置模块</span><br><span class="line">[view] </span><br><span class="line">path = <span class="regexp">/srv/</span>view</span><br><span class="line">read only = no</span><br><span class="line">auth users = root</span><br><span class="line">secrets file = <span class="regexp">/etc/</span>rsyncd.passwd</span><br><span class="line">list = no</span><br></pre></td></tr></table></figure></p>
+<p>1）uid、gid：当使用非root账号时，那么一定要确保服务的的文件夹是否有该非root账号写入的权限</p>
+<p>2）use chroot = no ：是否可以切换到root目录，当chroot为yes的时候，客户端连接模块的时候，先chroot到模块参数指定的目录下，必须使用root权限，端口号必须是1024以内，且不能备份path路径外的链接文件</p>
+<p>3）max connections = 2 ：表示同时最大的连接数，也就是同时只能有两个客户端对自己进行连接并且此选项必须与lock file = /var/run/rsyncd.lock 共同使用，若不指定，默认为/var/run/rsyncd.lock</p>
+<p>4）path = /captain/shell：表示的是当客户端把数据同步过来将保存的路径</p>
+<p>5）read only = no ：如果为只读，那么将不能进行写同步，所以必须关闭auth users = rsync ：用来进行同步的用户，不需要系统用户中有，虚拟的就行</p>
+<p>7）secrets file = /etc/rsyncd.secrets ：表示的是账号密码文件，此文件可随意指定，文件里必须以username：password的格式<br><code>root:123456</code><br>此文件权限必须为600，否则会报错<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#执行命令：</span><br><span class="line">echo <span class="string">"root:123456"</span> &gt; <span class="regexp">/etc/</span>rsyncd.passwd</span><br><span class="line">chmod <span class="number">600</span> /etc/rsyncd.passwd</span><br></pre></td></tr></table></figure></p>
+<p>8）list = no ：表示的是当服务端拒绝客户端的请求时，是否是直接显示权限拒绝，还是现实模块不存在，一般与hosts allow 和hosts deny一起使用</p>
+<p>当一个被服务端拒绝的请求进来时，如果设置为 list = no，那么直接返回模块不存在,如果不设置，那么是什么错就返回什么错</p>
+<h5 id="Travis配置文件"><a href="#Travis配置文件" class="headerlink" title="Travis配置文件"></a>Travis配置文件</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#指定node版本</span><br><span class="line">language: node_js</span><br><span class="line">node_js:</span><br><span class="line">- <span class="string">'8'</span>   </span><br><span class="line"></span><br><span class="line">#指定只有检测到master分支有变动时才执行任务</span><br><span class="line">branchs:</span><br><span class="line">  only:</span><br><span class="line">  - master  </span><br><span class="line"></span><br><span class="line"># 指定缓存模块，可选。缓存可加快编译速度。</span><br><span class="line">cache:</span><br><span class="line">  directories:</span><br><span class="line">    - node_modules</span><br><span class="line"></span><br><span class="line">install:</span><br><span class="line">- echo  $RSYNCPWD &gt; rsyncd.passwd </span><br><span class="line">- chmod <span class="number">600</span> rsyncd.passwd</span><br><span class="line">- npm install</span><br><span class="line">script:</span><br><span class="line">- npm run build</span><br><span class="line"></span><br><span class="line">after_success:</span><br><span class="line">- rsync --<span class="keyword">delete</span> --password-file=./rsyncd.passwd -r ./dist $&#123;SERVER_NAME&#125;@$&#123;SERVER_IP&#125;::view</span><br><span class="line"></span><br><span class="line">#$RSYNCPWD 跟你在服务器端的密码保持一致(不需要带userName)</span><br><span class="line">#$&#123;SERVER_NAME&#125; travisWeb端配置的环境变量(userName)</span><br><span class="line">#$&#123;SERVER_IP&#125; 服务器IP</span><br><span class="line">#::view 设置的模块</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+    
+      <div>
+        <script src="https://giscus.app/client.js" data-repo="Shadownc/getComment" data-repo-id="R_kgDOKDNmJA" data-category="Announcements" data-category-id="DIC_kwDOKDNmJM4CYVsf" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
+        </script>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/assets/images/shadow_qrcode.jpg" alt="shadow wechat" style="width: 200px; max-width: 100%;">
+    <div>扫一扫，关注微信公众号。</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/03/Docker部署-DaoCloud/" rel="next" title="Docker部署--DaoCloud">
+                <i class="fa fa-chevron-left"></i> Docker部署--DaoCloud
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/25/package.json and package-lock.json/" rel="prev" title="package.json and package-lock.json">
+                package.json and package-lock.json <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/assets/images/logo.jpg" alt="shadow">
+            
+              <p class="site-author-name" itemprop="name">shadow</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Shadownc" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/99bcb857e7e4" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#生成密钥对"><span class="nav-number">1.</span> <span class="nav-text">生成密钥对</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#新建config文件"><span class="nav-number">2.</span> <span class="nav-text">新建config文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#将生成的公钥添加为受信列表（重点）"><span class="nav-number">3.</span> <span class="nav-text">将生成的公钥添加为受信列表（重点）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#服务器安装Travis"><span class="nav-number">4.</span> <span class="nav-text">服务器安装Travis</span></a></li></ol><li class="nav-item nav-level-4"><a class="nav-link" href="#上面的并没有成功-具体Travis网页端并没有生成环境变量–有知道得小伙伴可以加群告诉我下：163958730"><span class="nav-number"></span> <span class="nav-text">上面的并没有成功 具体Travis网页端并没有生成环境变量–有知道得小伙伴可以加群告诉我下：163958730</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#另一种方法–rsync"><span class="nav-number">1.</span> <span class="nav-text">另一种方法–rsync</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Travis配置文件"><span class="nav-number">2.</span> <span class="nav-text">Travis配置文件</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">by shadow</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"live2d-widget-model-z16"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
